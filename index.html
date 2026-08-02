@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f7f1e7" />
+  <title>Undangan Pernikahan | Arunika & Bima</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --white: #ffffff;
+      --cream: #f8f2e8;
+      --cream-dark: #eadfce;
+      --gold: #b99654;
+      --gold-dark: #8f6d32;
+      --text: #3f372d;
+      --muted: #766d62;
+      --shadow: 0 18px 55px rgba(77, 57, 33, 0.14);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(185, 150, 84, 0.10), transparent 36%),
+        linear-gradient(180deg, #fffdf9 0%, var(--cream) 55%, #fffdf9 100%);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body.locked {
+      overflow: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    .section-label {
+      color: var(--gold-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      font-size: 0.74rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.3rem, 6vw, 4.6rem);
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .gold-line {
+      width: 74px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 22px auto;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 25px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-weight: 600;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      box-shadow: 0 12px 30px rgba(143, 109, 50, 0.26);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Cover */
+    .opening-cover {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      overflow: hidden;
+      background: linear-gradient(rgba(32, 25, 17, 0.4), rgba(32, 25, 17, 0.6)), url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1600&q=85") center/cover;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .opening-cover.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .cover-card {
+      width: min(590px, 100%);
+      padding: 46px 28px;
+      border-radius: 30px;
+      text-align: center;
+      color: white;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.28);
+    }
+
+    .cover-card h1 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3.2rem, 12vw, 5rem);
+      line-height: 0.92;
+      margin-bottom: 17px;
+    }
+
+    /* Couple Section */
+    .couple-grid {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .person-card {
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(185, 150, 84, 0.22);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .person-photo {
+      width: 160px;
+      height: 200px;
+      margin: 0 auto 22px;
+      overflow: hidden;
+      border-radius: 100px 100px 26px 26px;
+      border: 4px solid rgba(185, 150, 84, 0.25);
+    }
+
+    .person-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .person-card h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      color: var(--gold-dark);
+    }
+
+    /* Countdown */
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .countdown-box {
+      background: var(--white);
+      padding: 15px;
+      border-radius: 12px;
+      min-width: 70px;
+      box-shadow: var(--shadow);
+    }
+
+    .countdown-box span {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--gold-dark);
+    }
+
+    /* Music Control Button */
+    #music-control {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+      background: var(--gold);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+  </style>
+</head>
+<body class="locked">
+
+  <!-- Audio Elemen -->
+  <audio id="wedding-audio" loop>
+    <source src="https://soundhelix.com" type="audio/mp3">
+  </audio>
+
+  <!-- Button Music -->
+  <button id="music-control" style="display:none;">🎵</button>
+
+  <!-- Cover Pembuka -->
+  <div id="cover" class="opening-cover">
+    <div class="cover-card">
+      <p class="eyebrow">Walimatul 'Ursy</p>
+      <h1>Arunika & Bima</h1>
+      <div class="gold-line"></div>
+      <div class="guest-box">
+        <small>Kepada Yth. Bapak/Ibu/Saudara/i</small>
+        <div class="guest-name">Tamu Undangan Spesial</div>
+      </div>
+      <button class="btn btn-primary open-btn" onclick="openWedding()">Buka Undangan</button>
+    </div>
+  </div>
+
+  <!-- Konten Utama Halaman -->
+  <section class="hero section center">
+    <div class="container">
+      <p class="hero-kicker">The Wedding Of</p>
+      <h2>Arunika & Bima</h2>
+      <p class="hero-date">Minggu, 12 Desember 2026</p>
+      <div class="gold-line"></div>
+      
+      <!-- Countdown Timer -->
+      <div class="countdown-container">
+        <div class="countdown-box"><span id="days">00</span>Hari</div>
+        <div class="countdown-box"><span id="hours">00</span>Jam</div>
+        <div class="countdown-box"><span id="minutes">00</span>Menit</div>
+        <div class="countdown-box"><span id="seconds">00</span>Detik</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Profil Pengantin -->
+  <section class="section container">
+    <div class="center">
+      <p class="section-label">Mempelai</p>
+      <h2 class="section-title">Kedua MempelaI</h2>
+    </div>
+    <div class="couple-grid">
+      <div class="person-card">
+        <div class="person-photo">
+          <img src="https://unsplash.com" alt="Arunika">
+        </div>
+        <h3>Arunika Shanti, S.T.</h3>
+        <p>Putri tercinta dari Bapak Ahmad & Ibu Siti</p>
+      </div>
+      <div class="person-card">
+        <div class="person-photo">
+          <img src="https://unsplash.com" alt="Bima">
+        </div>
+        <h3>Bima Perkasa, S.Kom.</h3>
+        <p>Putra tercinta dari Bapak Jaka & Ibu Utami</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script Logika Musik & Countdown -->
+  <script>
+    const audio = document.getElementById('wedding-audio');
+    const musicBtn = document.getElementById('music-control');
+
+    function openWedding() {
+      // Hilangkan Cover
+      document.getElementById('cover').classList.add('hidden');
+      document.body.classList.remove('locked');
+      
+      // Putar Musik Otomatis
+      audio.play();
+      musicBtn.style.display = 'block';
+    }
+
+    // Tombol Kontrol Musik Manual
+    musicBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        musicBtn.textContent = '🎵';
+      } else {
+        audio.pause();
+        musicBtn.textContent = '🔇';
+      }
+    });
+
+    // Countdown Logic
+    const targetDate = new Date("Dec 12, 2026 09:00:00").getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+      if(diff > 0) {
+        document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
